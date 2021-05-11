@@ -58,9 +58,9 @@ module.exports={
         return result
     },
 
-    findAllManufacturers:async(a_id)=>{
-        const result=await pool.awaitQuery(`select * from manufacturer where a_id=?`,
-            [a_id])
+    findAllManufacturers:async()=>{
+        const result=await pool.awaitQuery(`select * from manufacturer`,
+            )
         return result
     }
 }

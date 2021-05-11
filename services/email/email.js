@@ -11,7 +11,7 @@ exports.sendMail = (RECEIVER_EMAIL, subject, body, links) => {
         port: 587,
         auth: {
             user: SENDER_EMAIL,
-            pass: ""
+            pass: "labeorohita"
         }
     };
     // } else {

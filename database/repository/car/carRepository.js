@@ -20,9 +20,10 @@ module.exports={
         return result
     },
 
-    deleteCar:async(id)=>{
-        const result=await pool.awaitQuery(`delete from car where registration_id=?`,
-            [id])
+    deleteCar:async(id,d)=>{
+        const result=await pool.awaitQuery(`delete from car where registration_id=? and m_id=?`,
+            [id,d])
+        console.log("is it right",result)
         return result
     },
 
@@ -38,7 +39,7 @@ module.exports={
                 data.registration_id,
                 id
             ])
-        //console.log(result,"ppppppppppppp")
+        console.log(result,"ppppppppppppp")
         return result
     },
 
@@ -65,6 +66,7 @@ module.exports={
     fetchById:async(id,d)=>{
         const result=await pool.awaitQuery(`select * from car where registration_id=? and m_id=?`,
             [id,d])
+        //console.log("is it right",result)
         return result
     },
 }

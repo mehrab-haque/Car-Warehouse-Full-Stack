@@ -4,8 +4,11 @@ const {
     createAdmin
 } = require("../../database/repository/admin/adminAuthRepository");
 const { makeHash } = require('../../auth/authServices');
-module.exports={
 
+console.log("now")
+
+
+module.exports={
 
     createAdmin1: async(req, res) => {
         console.log("yes,we are in controller in createadmin1");
@@ -21,7 +24,7 @@ module.exports={
         }catch(err){
             return res.status(500).json({
                 success: 0,
-                error: err.sqlMessage,
+                error: err,
             });
         }
     }

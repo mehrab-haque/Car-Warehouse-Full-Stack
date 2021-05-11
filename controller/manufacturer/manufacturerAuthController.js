@@ -12,7 +12,7 @@ const {
 const { sendVerificationMail } = require('../../services/email/emailservices');
 module.exports={
     addManufacturer1: async(req, res) => {
-        console.log("yes,we are in controller in add manufacturer");
+        console.log("yes,we are in controller in add manufacturer 1");
 
         const body = req.body;
 
@@ -39,9 +39,9 @@ module.exports={
 
 
     deleteManufacturer1:async (req, res) => {
-        console.log("yes,we are in deletecarid");
+        console.log("yes,we are in deletec manufacturer 1");
         const data = req.body.m_id;
-        console.log(data);
+        console.log(data,"hi");
 
 
         try{
@@ -55,6 +55,12 @@ module.exports={
         }
         try{
             const deleteResult=await deleteManufacturer(data)
+            if(deleteResult.affectedRows===0){
+                return res.status(500).json({
+                    success: 0,
+                    message: "not found"
+                });
+            }
             return res.json({
                 success: 1,
                 message: "manufacturer deleted successfully",
@@ -69,7 +75,7 @@ module.exports={
     },
     updatePassword1:async (req, res) => {
 
-        console.log("in controller in updateCarId")
+        console.log("in controller in update pass 1")
         const body = req.body;
         body.password=makeHash(body.password)
         email=body.email
@@ -103,7 +109,7 @@ module.exports={
     },
 
     findAllManufacturers1:async (req,res)=>{
-
+        console.log("yes we are in fin all manufacturers 1")
         try{
           const results= await findAllManufacturers(req.body.userId)
             return res.json({

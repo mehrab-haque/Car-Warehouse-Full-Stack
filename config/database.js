@@ -15,9 +15,11 @@ const pool = mysql.createPool({
     port: process.env.DB_PORT,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: "habijabi",
+    password: process.env.DB_PASS,
     database: process.env.MYSQL_DB,
     connectionLimit: 10,
 });
+
+console.log("connectected")
 
 module.exports = pool;

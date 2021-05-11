@@ -10,6 +10,7 @@ module.exports={
     },
 
     getAdminByEmail: async (email) => {
+        console.log(email)
         const result=await pool.awaitQuery(`select * from admin where email=?`,
             [email])
         console.log("in get admin by email",result)

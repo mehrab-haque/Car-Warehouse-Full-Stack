@@ -8,19 +8,29 @@ module.exports.login = async(req, res, next) => {
     const { password, type,email } = req.body;
 
     // Fetching userData from database
-
+   //console.log(password,email,type)
 
     let userInfo;
 
     try{
-        if (type === "admin") {
-            userInfo= await getAdminByEmail(email);
-            console.log("in line 15 ",userInfo);
-        }
         if (type === "manufacturer") {
             userInfo=await findByEmail(email);
             console.log("in line 19 ",userInfo);
         }
+    }catch (e) {
+        return res.status(500).json({
+            error: e.sqlMessage
+        });
+    }
+
+    try{
+        //console.log("enter?")
+        if (type === "admin") {
+            console.log("what......",email)
+            userInfo= await getAdminByEmail(email);
+            console.log("in line 15 ",userInfo);
+        }
+
     }catch (e){
         return res.status(500).json({
             error: e.sqlMessage
