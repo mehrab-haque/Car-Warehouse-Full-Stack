@@ -16,6 +16,7 @@ module.exports={
     getCarById:async(id)=>{
         const result=await pool.awaitQuery(`select * from car where registration_id=?`,
             [id])
+        console.log("mor",result[0]);
         return result
     },
     getCarByModel:async(model)=>{

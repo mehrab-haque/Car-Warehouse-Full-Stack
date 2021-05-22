@@ -8,7 +8,10 @@ module.exports.getAccessToken = async (req, res) => {
     res
         .json({
             access_token: token,
-
+            userId:data.userId,
+            email:data.email,
+            type:data.type,
+            username:data.username
         })
         .status(200);
 }

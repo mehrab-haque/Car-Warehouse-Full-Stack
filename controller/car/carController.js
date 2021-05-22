@@ -6,7 +6,8 @@ const {
     getCarByMake,
     getCarByModel,
     fetchById,
-    getCarById
+    getCarById,
+    getImage
 } = require("../../database/repository/car/carRepository");
 
 module.exports={
@@ -41,7 +42,7 @@ module.exports={
         }
         try{
             console.log("before delete")
-            const deleteResult=await deleteCar(req.body.registration_id,req.body.userId)
+            const deleteResult=await deleteCar(req.query.id,req.query.userId)
             console.log("delete controller",deleteResult)
             if(deleteResult.affectedRows===0){
                 return res.status(500).json({
@@ -68,7 +69,8 @@ module.exports={
         console.log("yes we are in update car 1")
         try{
             const isExist=await fetchById(req.body.registration_id,req.body.userId)
-            //console.log(isExist)
+
+            console.log("is car exist?",isExist.length)
         }catch (e) {
             return res.status(500).json({
                 success: 0,
@@ -142,12 +144,30 @@ module.exports={
         }
     },
     getCarById1:async (req,res)=>{
-        console.log("yes we are in get car by id 1")
+        console.log("yes we are in get car by id 1 in car controller")
         try{
-            const results= await getCarById(req.body.registration_id,req.body.userId)
+            const results= await getCarById(req.query.id,req.query.userId)
+            console.log("is ai",results[0])
             return res.json({
-                success: 1,
-                results:results
+
+                Car:results[0]
+            });
+        }catch(e) {
+            return res.json({
+                success: 0,
+                error:"not found"
+            });
+        }
+    },
+
+    getImage1:async (req,res)=>{
+        console.log("yes we are in get car iamge by id 1 in car controller")
+        try{
+            const results= await getImage(req.body.url,req.body.id)
+            //console.log("is ai",results[0])
+            return res.json({
+
+                success:1
             });
         }catch(e) {
             return res.json({

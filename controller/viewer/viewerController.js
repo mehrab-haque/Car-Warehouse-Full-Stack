@@ -9,18 +9,12 @@ const {
 module.exports={
     getCars1:async (req,res)=>{
         console.log("yes we are in get cars 1")
-        try{
-            const results= await getCars()
-            return res.json({
-                success: 1,
-                results:results
-            });
-        }catch(e) {
-            return res.json({
-                success: 0,
-                error:"not found"
-            });
-        }
+        const results= await getCars()
+        console.log("xka",results)
+        return res.json({
+
+            results:results
+        });
     },
 
     getCarByMake1:async (req,res)=>{
@@ -56,7 +50,7 @@ module.exports={
     getCarById1:async (req,res)=>{
         console.log("yes we are in get car by id 1")
         try{
-            const results= await getCarById(req.body.registration_id)
+            const results= await getCarById(req.query.id)
             return res.json({
                 success: 1,
                 results:results
@@ -71,10 +65,10 @@ module.exports={
 
     buyCar1:async (req,res)=>{
         try{
-            const results= await buyCar(req.body.registration_id)
+            const results= await buyCar(req.query.id)
             if(results===5){
                 return res.json({
-                    success: 0,
+                    success: 5,
                     error:"out of stock"
                 });
             }

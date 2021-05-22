@@ -47,15 +47,17 @@ module.exports.login = async(req, res, next) => {
     const hashPass = userInfo.password;
 
     //  Add more info if needed
-    let userId;
+    let userId,username;
     if (type === "admin") userId = userInfo.a_id;
     if (type === "manufacturer") userId = userInfo.m_id;
+    username=userInfo.username;
 
     if (hashPass && isPasswordValid(hashPass, password)) {
         req.body = {
             userId,
             email,
-            type
+            type,
+            username
         }
         next();
 
@@ -105,6 +107,7 @@ module.exports.isValidManufacturerJWTToken = (req, res, next) => {
                 next();
             }
         } catch (err) {
+            console.log("what is error: "+err)
             return res.status(403).send();
         }
     } else {

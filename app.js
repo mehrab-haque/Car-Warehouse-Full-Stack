@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+
+
 const adminRouter=require("./routes/admin/adminRouter")
 const manufacturerRouter=require("./routes/manufacturer/manufacturerRouter")
 

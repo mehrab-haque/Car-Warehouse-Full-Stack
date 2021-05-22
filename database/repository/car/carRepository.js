@@ -4,8 +4,8 @@ const pool = require("../../../config/database");
 module.exports={
 
     addCar:async (data)=>{
-        const result =await pool.awaitQuery(`insert into car(registration_id,year,colour,make,model,price,quantity,m_id)
-         values(?,?,?,?,?,?,?,?)`,
+        const result =await pool.awaitQuery(`insert into car(registration_id,year,colour,make,model,price,quantity,m_id,image)
+         values(?,?,?,?,?,?,?,?,?)`,
             [
 
                 data.registration_id,
@@ -15,7 +15,8 @@ module.exports={
                 data.model,
                 data.price,
                 data.quantity,
-                data.userId
+                data.userId,
+                data.image
             ])
         return result
     },
@@ -28,7 +29,7 @@ module.exports={
     },
 
     updateCar:async(data,id)=>{
-        const result=await pool.awaitQuery(`update car set year=?,colour=?,make=?,model=?,price=?,quantity=? where registration_id=? and m_id=?`,
+        const result=await pool.awaitQuery(`update car set year=?,colour=?,make=?,model=?,price=?,quantity=?,image=? where registration_id=? and m_id=?`,
             [
                 data.year,
                 data.colour,
@@ -36,6 +37,7 @@ module.exports={
                 data.model,
                 data.price,
                 data.quantity,
+                data.image,
                 data.registration_id,
                 id
             ])
@@ -56,6 +58,7 @@ module.exports={
     getCarById:async(id,d)=>{
         const result=await pool.awaitQuery(`select * from car where registration_id=? and m_id=?`,
             [id,d])
+        console.log(result,"mmmmmmmm")
         return result
     },
     getCarByModel:async(model,id)=>{
@@ -69,4 +72,12 @@ module.exports={
         //console.log("is it right",result)
         return result
     },
+
+    getImage:async (url,id)=>{
+        console.log("hi")
+        const result=await pool.awaitQuery(`update car set image=? where registration_id=?`,
+            [url,id])
+        console.log(result)
+        return result
+    }
 }
